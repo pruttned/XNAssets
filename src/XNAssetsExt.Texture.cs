@@ -4,7 +4,7 @@ using XNAssets;
 
 #if !STRIDE
 using Microsoft.Xna.Framework.Graphics;
-using DdsKtxXna;
+//using DdsKtxXna;
 #else
 using Stride.Graphics;
 using Texture2D = Stride.Graphics.Texture;
@@ -31,16 +31,16 @@ namespace AssetManagementBase
 
 		private static AssetLoader<Texture> _textureLoader = (manager, assetName, settings, tag) =>
 		{
-#if !STRIDE
-			if (assetName.ToLower().EndsWith(".dds"))
-			{
-				// TODO: Apply loading settings
-				using (var stream = manager.Open(assetName))
-				{
-					return DdsKtxLoader.FromStream((GraphicsDevice)tag, stream);
-				}
-			}
-#endif
+//#if !STRIDE
+//			if (assetName.ToLower().EndsWith(".dds"))
+//			{
+//				// TODO: Apply loading settings
+//				using (var stream = manager.Open(assetName))
+//				{
+//					return DdsKtxLoader.FromStream((GraphicsDevice)tag, stream);
+//				}
+//			}
+//#endif
 
 			var premultiplyAlpha = false;
 			var textureLoadingSettings = (TextureLoadingSettings)settings;
@@ -56,18 +56,18 @@ namespace AssetManagementBase
 		};
 
 #if !STRIDE
-		private static AssetLoader<TextureCube> _textureCubeLoader = (manager, assetName, settings, tag) =>
-		{
-			using (var stream = manager.Open(assetName))
-			{
-				return (TextureCube)DdsKtxLoader.FromStream((GraphicsDevice)tag, stream);
-			}
-		};
+		//private static AssetLoader<TextureCube> _textureCubeLoader = (manager, assetName, settings, tag) =>
+		//{
+		//	using (var stream = manager.Open(assetName))
+		//	{
+		//		return (TextureCube)DdsKtxLoader.FromStream((GraphicsDevice)tag, stream);
+		//	}
+		//};
 
-		public static TextureCube LoadTextureCube(this AssetManager assetManager, GraphicsDevice graphicsDevice, string assetName)
-		{
-			return assetManager.UseLoader(_textureCubeLoader, assetName, tag: graphicsDevice);
-		}
+		//public static TextureCube LoadTextureCube(this AssetManager assetManager, GraphicsDevice graphicsDevice, string assetName)
+		//{
+		//	return assetManager.UseLoader(_textureCubeLoader, assetName, tag: graphicsDevice);
+		//}
 
 		public static Texture LoadTexture(this AssetManager assetManager, GraphicsDevice graphicsDevice, string assetName)
 		{
